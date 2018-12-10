@@ -27,9 +27,11 @@ def restaurant_favorite(request, restaurant_id):
 # This view will be used to display only restaurants a user has favorited
 def favorite_restaurants(request):
     my_fav = FavoriteRestaurant.objects.filter(user=request.user)
+    restaurant_likes = [like.restaurant for like in my_fav] 
 
     context = {
-        "my_fav":my_fav,
+        "my_fav":restaurant_likes,
+        
     }
     
     return render(request, 'favs.html', context)
